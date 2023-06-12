@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rabe_bot">
+     <xacro:include filename="$(find robot_simulation_description)/urdf/rabe_bot_basic.gazebo"/>         
+
+          
+          <link name="dummy_link">
+                    
+          </link>
+          <link name="base_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.5"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <box size="0.7 0.4 0.1"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 1.0 1.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <box size="0.7 0.4 0.2"/>
+                              </geometry>
+                    </collision>
+          </link>
+          <joint name="base_joint" type="fixed">
+                    <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0"/>
+                    <parent link="dummy_link"/>
+                    <child link="base_link"/>
+                    <axis xyz="0.0 0.0 1.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint>
+
+<!--Right Front Cylinder Stand-->        
+
+<!-- when using xacro- 
+do not forget to be sure that the xacro is also installed in your ROS 
+otherwise, you can install it by using:
+ $ sudo apt-get install ros-neotic-xacro in the terminal -->
+
+
+          <xacro:macro name="stand" params="name x y z mass radius length">
+                    <link name="${name}_link">
+                                  <inertial>
+                                        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                                        <mass value="${mass}"/>
+                                        <inertia ixx="${0.5 * mass * radius * radius}" 
+                                                  ixy="0.0" 
+                                                  ixz="0.0" 
+                                                  iyy="${0.5 * mass * radius * radius}" 
+                                                  iyz="0.0" 
+                                                  izz="${0.25 * mass * radius * radius + (1/12) * mass * length * length}" />
+                                   </inertial>
+                              <visual name="">
+                                        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                                        <geometry>
+                                                  <cylinder radius="0.015" length="0.2"/>
+                                        </geometry>
+                                        <material name="">
+                                                  <color rgba="0.0 0.0 0.0 1.0"/>
+                                                  <texture filename=""/>
+                                        </material>1
+                              </visual>
+                              <collision>
+                                        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                                        <geometry>
+                                                  <cylinder radius="0.015" length="0.2"/>
+                                        </geometry>
+                              </collision>
+                    </link>
+                    <joint name="${name}_joint" type="fixed">
+                              <origin xyz="${x} ${y} ${z}" rpy="0.0 0.0 0.0"/>
+                              <parent link="base_link"/>
+                              <child link="${name}_link"/>
+                              <axis xyz="0.0 0.0 0.0"/>
+                              <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+                    </joint> 
+          </xacro:macro>
+
+          <xacro:stand name="front_right_stand" x="-0.25" y="-0.15" z="0.1" mass="0.05" radius="0.015" length="0.2"/>
+          <xacro:stand name="front_left_stand" x="-0.25" y="0.15" z="0.1" mass="0.05" radius="0.015" length="0.2"/>
+          <xacro:stand name="rear_right_stand" x="0.25" y="-0.15" z="0.1" mass="0.05" radius="0.015" length="0.2"/>
+          <xacro:stand name="rear_left_stand" x="0.25" y="0.15" z="0.1" mass="0.05" radius="0.015" length="0.2"/>
+          
+        
+          <!-- Layer Two Top -->
+
+          <link name="top_layer_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.2"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <box size="0.6 0.35 0.05"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 0.0 0.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <box size="0.6 0.35 0.05"/>
+                              </geometry>
+                    </collision>
+          </link>
+
+          <joint name="top_layer_joint" type="fixed">
+                    <origin xyz="0.0 0.0 0.2" rpy="0.0 0.0 0.0"/>
+                    <parent link="base_link"/>
+                    <child link="top_layer_link"/>
+                    <axis xyz="0.0 0.0 0.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint> 
+
+          <!--right front wheel-->
+          <xacro:macro name="wheel" params="name x y">
+               <link name="${name}_link">
+                              <inertial>
+                                        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                                        <mass value="0.5"/>
+                                        <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+                              </inertial>
+                              <visual name="">
+                                        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                                        <geometry>
+                                                  <mesh filename="package://robot_simulation_description/meshes/left1_tire.stl" scale="0.005 0.005 0.005"/>
+                                        </geometry>
+                                        <material name="black">
+                                                  <color rgba="0.0 0.0 0.0 1.0"/>
+                                                  <texture filename=""/>
+                                        </material>
+                              </visual>
+                              <collision>
+                                        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                                        <geometry>
+                                                  <mesh filename="package://robot_simulation_description/meshes/left1_tire.stl" scale="0.005 0.005 0.005"/>
+                                        </geometry>
+                              </collision>
+                    </link>
+                    <joint name="${name}_joint" type="continuous">
+                              <origin xyz="${x} ${y} 0.0" rpy=" 0.0 1.57 0.0 "/>
+                              <parent link="base_link"/>
+                              <child link="${name}_link"/>
+                              <axis xyz="0.0 1.0 0.0"/>
+                              
+                    </joint>
+     
+          </xacro:macro>
+
+          <xacro:macro name="wheel_left" params="name x y">
+               <link name="${name}_link">
+                              <inertial>
+                                        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                                        <mass value="0.5"/>
+                                        <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+                              </inertial>
+                              <visual name="">
+                                        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                                        <geometry>
+                                             <mesh filename="package://robot_simulation_description/meshes/right1_tire.stl" scale="0.005 0.005 0.005"/>
+                                        </geometry>
+                                        <material name="black">
+                                             <color rgba="0.0 0.0 0.0 1.0"/>
+                                             <texture filename=""/>
+                                        </material>
+                              </visual>
+                              <collision>
+                                        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                                        <geometry>
+                                             <mesh filename="package://robot_simulation_description/meshes/right1_tire.stl" scale="0.005 0.005 0.005"/>
+                                        </geometry>
+                              </collision>
+                    </link>
+                    <joint name="${name}_joint" type="continuous">
+                              <origin xyz="${x} ${y} 0.0" rpy=" 0.0 1.57 0.0 "/>
+                              <parent link="base_link"/>
+                              <child link="${name}_link"/>
+                              <axis xyz="0.0 1.0 0.0"/>
+                              
+                    </joint>
+     
+          </xacro:macro>
+
+
+
+<xacro:wheel name="front_right_wheel" x="0.2" y="-0.26"/>
+<xacro:wheel_left name="front_left_wheel" x="0.2" y="0.26"/>
+<xacro:wheel name="rear_right_wheel" x="-0.2" y="-0.26"/>
+<xacro:wheel_left name="rear_left_wheel" x="-0.2" y="0.26"/>
+
+          
+</robot>

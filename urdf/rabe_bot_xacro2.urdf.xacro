@@ -1,0 +1,384 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rabe_bot">
+          
+          <link name="dummy_link">
+                    
+          </link>
+          <link name="base_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.0"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <box size="0.7 0.4 0.1"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 1.0 1.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <box size="0.7 0.4 0.2"/>
+                              </geometry>
+                    </collision>
+          </link>
+          <joint name="base_joint" type="fixed">
+                    <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0"/>
+                    <parent link="dummy_link"/>
+                    <child link="base_link"/>
+                    <axis xyz="0.0 0.0 1.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint>
+
+<!--Right Front Cylinder Stand-->        
+
+<!-- when using xacro- 
+do not forget to be sure that the xacro is also installed in your ROS 
+otherwise, you can install it by using:
+ $ sudo apt-get install ros-neotic-xacro in the terminal -->
+
+
+
+
+          <xacro:property name="standright" value="right_cylinder_stand"/>
+          
+          
+          <link name="front_${standright}_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.0"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.015" length="0.2"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 0.0 0.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>1
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.015" length="0.2"/>
+                              </geometry>
+                    </collision>
+          </link>
+          <joint name="front_${standright}_joint" type="fixed">
+                    <origin xyz="-0.25 -0.15 0.1" rpy="0.0 0.0 0.0"/>
+                    <parent link="base_link"/>
+                    <child link="front_${standright}_link"/>
+                    <axis xyz="0.0 0.0 0.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint>
+
+<!--Left Front Cylinder Stand-->  
+
+          <xacro:property name="standleft" value="left_cylinder_stand"/>
+
+          <link name="front_${standleft}_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.0"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.015" length="0.2"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 0.0 0.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>1
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.015" length="0.2"/>
+                              </geometry>
+                    </collision>
+          </link>
+          <joint name="front_${standleft}_joint" type="fixed">
+                    <origin xyz="-0.25 0.15 0.1" rpy="0.0 0.0 0.0"/>
+                    <parent link="base_link"/>
+                    <child link="front_${standleft}_link"/>
+                    <axis xyz="0.0 0.0 0.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint>
+
+<!--Right Rear Cylinder Stand-->        
+
+          <link name="rear_${standright}_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.0"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.015" length="0.2"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 0.0 0.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>1
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.015" length="0.2"/>
+                              </geometry>
+                    </collision>
+          </link>
+          <joint name="rear_${standright}_joint" type="fixed">
+                    <origin xyz="0.25 -0.15 0.1" rpy="0.0 0.0 0.0"/>
+                    <parent link="base_link"/>
+                    <child link="rear_${standright}_link"/>
+                    <axis xyz="0.0 0.0 0.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint>
+
+<!-- Left Rear Cylinder Stand         -->
+
+          <link name="rear_${standleft}_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.0"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.015" length="0.2"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 0.0 0.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>1
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.015" length="0.2"/>
+                              </geometry>
+                    </collision>
+          </link>
+          <joint name="rear_${standleft}_joint" type="fixed">
+                    <origin xyz="0.25 0.15 0.1" rpy="0.0 0.0 0.0"/>
+                    <parent link="base_link"/>
+                    <child link="rear_${standleft}_link"/>
+                    <axis xyz="0.0 0.0 0.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint>
+
+<!-- Layer Two Top -->
+
+          <link name="top_layer_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.0"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <box size="0.6 0.35 0.05"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 0.0 0.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <box size="0.6 0.35 0.05"/>
+                              </geometry>
+                    </collision>
+          </link>
+
+          <joint name="top_layer_joint" type="fixed">
+                    <origin xyz="0.0 0.0 0.2" rpy="0.0 0.0 0.0"/>
+                    <parent link="base_link"/>
+                    <child link="top_layer_link"/>
+                    <axis xyz="0.0 0.0 0.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint>
+
+<!--right front wheel-->
+
+          <xacro:property name="sideright" value="right_wheel"/>
+          
+
+          <link name="front_${sideright}_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.0"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.15" length="0.1"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 0.0 0.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.15" length="0.1"/>
+                              </geometry>
+                    </collision>
+          </link>
+          <joint name="front_${sideright}_joint" type="continuous">
+                    <origin xyz="0.20 -0.25 0.0" rpy="1.57 0.0 0.0 "/>
+                    <parent link="base_link"/>
+                    <child link="front_${sideright}_link"/>
+                    <axis xyz="0.0 0.0 1.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint>
+
+<!--left front wheel-->
+
+          <xacro:property name="sideleft" value="left_wheel"/>
+
+          <link name="front_${sideleft}_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.0"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.15" length="0.1"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 0.0 0.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.15" length="0.1"/>
+                              </geometry>
+                    </collision>
+          </link>
+          <joint name="front_${sideleft}_joint" type="continuous">
+                    <origin xyz="0.20 0.25 0.0" rpy="1.57 0.0 0.0 "/>
+                    <parent link="base_link"/>
+                    <child link="front_${sideleft}_link"/>
+                    <axis xyz="0.0 0.0 1.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint>
+
+<!--right rear wheel-->
+
+          <link name="rear_${sideright}_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.0"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.15" length="0.1"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 0.0 0.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.15" length="0.1"/>
+                              </geometry>
+                    </collision>
+          </link>
+          <joint name="rear_${sideright}_joint" type="continuous">
+                    <origin xyz="-0.20 -0.25 0.0" rpy="1.57 0.0 0.0 "/>
+                    <parent link="base_link"/>
+                    <child link="rear_${sideright}_link"/>
+                    <axis xyz="0.0 0.0 1.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint>
+
+<!--left rear wheel-->
+
+          <link name="rear_${sideleft}_link">
+                    <inertial>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <mass value="0.0"/>
+                              <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+                    </inertial>
+                    <visual name="">
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.15" length="0.1"/>
+                              </geometry>
+                              <material name="">
+                                        <color rgba="1.0 0.0 0.0 1.0"/>
+                                        <texture filename=""/>
+                              </material>
+                    </visual>
+                    <collision>
+                              <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                              <geometry>
+                                        <cylinder radius="0.15" length="0.1"/>
+                              </geometry>
+                    </collision>
+          </link>
+          <joint name="rear_${sideleft}_joint" type="continuous">
+                    <origin xyz="-0.20 0.25 0.0" rpy="1.57 0.0 0.0 "/>
+                    <parent link="base_link"/>
+                    <child link="rear_${sideleft}_link"/>
+                    <axis xyz="0.0 0.0 1.0"/>
+                    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+          </joint>
+</robot>
+
+
+
+<!-- 
+<?xml version="1.0"?>
+<launch>
+<!-- to tell where the discription file parameter are       -->
+<!-- rabe_bot_basic1 needs line 5 instead of line 6.. this is before xacro -->
+          <!-- <param name="robot_description" textfile="$(find robot_simulation_description)/urdf/rabe_bot_basic.urdf"/> -->
+          <param name="robot_description" command="xacro '$(find robot_simulation_description)/urdf/rabe_bot_basic.urdf.xacro'"/>
+<!-- to run the configuration file saved already in rviz after the first time I added the robot model and tf. so it will be run every time I run rviz. Do not forget  line 15 below. -->
+          <arg name="rviz_config_file" default="$(find robot_simulation_description)/config/robot.rviz"/>
+
+<!-- To Run the Robot State Publisher for rviz -->
+          <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+<!-- to run the joint state publisher without gui -->
+          <!-- <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/> -->
+<!-- to run the joint state publisher for rviz but with gui which is already installed in the ros and to see if the wheels are moving in the same direction -->
+          <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui"/>
+<!-- this is to run the rviz but the last args tell that take the configuration which is already installed in rviz as a configuration file...notice that it will take the arg which is written in above and run the configuration file named robot as I already named it robot inside the rviz. This configuration will show the robot model and the tf and it will run every time I run rviz. -->
+          <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_config_file)"/>
+</launch> -->
+
+
+
+
+
+
+
+
+

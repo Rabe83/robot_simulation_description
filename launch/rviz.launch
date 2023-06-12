@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+<!-- to tell where the discription file parameter are       -->
+<!-- rabe_bot_basic1 needs line 5 instead of line 6.. this is before xacro -->
+          <!-- <param name="robot_description" textfile="$(find robot_simulation_description)/urdf/rabe_bot_basic.urdf"/> -->
+          <param name="robot_description" command="xacro '$(find robot_simulation_description)/urdf/rabe_bot_basic.urdf.xacro'"/>
+<!-- to run the configuration file saved already in rviz after the first time I added the robot model and tf. so it will be run every time I run rviz. Do not forget  line 15 below. -->
+          <arg name="rviz_config_file" default="$(find robot_simulation_description)/config/robot.rviz"/>
+
+<!-- To Run the Robot State Publisher for rviz -->
+          <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+<!-- to run the joint state publisher without gui -->
+          <!-- <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/> -->
+<!-- to run the joint state publisher for rviz but with gui which is already installed in the ros and to see if the wheels are moving in the same direction .This is quiet importatnt before moving to Gazebo Otherwise, we can run line 13 instead -->
+          <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui"/>
+<!-- this is to run the rviz but the last args tell that take the configuration which is already installed in rviz as a configuration file...notice that it will take the arg which is written in above and run the configuration file named robot as I already named it robot inside the rviz. This configuration will show the robot model and the tf and it will run every time I run rviz. -->
+         
+         <!-- This line is commented in lecture 9 with Kyr because I create a new launch file that is called world.launch where I include the empty.world with only a wall in it and inside a folder called world in my package.  -->
+          <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_config_file)"/> -->
+</launch>
