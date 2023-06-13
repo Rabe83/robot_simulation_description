@@ -61,8 +61,8 @@
       </plugin>
     </gazebo>
 
-<!-- RGBD Camera
-  <gazebo reference="camera_link_optical">
+<!-- RGBD Camera -->
+  <!-- <gazebo reference="camera_link_optical">
     <sensor type="depth" name="camera">
         <always_on>1</always_on>
         <update_rate>20.0</update_rate>
@@ -151,4 +151,11 @@
 	  	<material>Gazebo/Black</material>
 	  </gazebo>
 
+    <gazebo reference="camera_link">
+	  	<material>Gazebo/Black</material>
+	  </gazebo>
+
+    <gazebo reference="LiDAR_link">
+	  	<material>Gazebo/Black</material>
+	  </gazebo>
 </diffrobot>

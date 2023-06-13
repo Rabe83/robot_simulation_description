@@ -203,4 +203,75 @@ otherwise, you can install it by using:
 <xacro:wheel_right name="rear_right_wheel" x="-0.2" y="-0.26"/>
 <xacro:wheel_left name="rear_left_wheel" x="-0.2" y="0.26"/>
           
+
+
+          <!---Kinect/Depth Camera-->  
+
+          <link name="camera_link">
+               <inertial>
+                    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                    <mass value="0.1"/>
+                    <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+               </inertial>
+               <visual name="">
+                    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                    <geometry>
+                         <mesh filename="package://robot_simulation_description/meshes/Kinect.dae" scale="0.0010 0.0010 0.0010"/>
+                    </geometry>
+                    <material name="">
+                         <color rgba="0.0 0.0 0.0 1.0"/>
+                         <texture filename=""/>
+                    </material>
+               </visual>
+               <collision>
+                    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                    <geometry>
+                         <mesh filename="package://robot_simulation_description/meshes/Kinect.dae" scale="0.0010 0.0010 0.0010"/>
+                    </geometry>
+               </collision>
+          </link>
+
+          <joint name="camera_joint" type="fixed">
+               <origin xyz="0.30 0.0 0.06" rpy="0.0 0.0 1.5705"/>
+               <parent link="base_link"/>
+               <child link="camera_link"/>
+               <axis xyz="0.0 0.0 0.0"/>
+     
+          </joint>
+
+
+
+          <!---LiDAR Camera-->  
+
+          <link name="LiDAR_link">
+               <inertial>
+                    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                    <mass value="0.1"/>
+                    <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+               </inertial>
+               <visual name="">
+                    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                    <geometry>
+                         <mesh filename="package://robot_simulation_description/meshes/LiDAR.dae" scale="0.0015 0.0015 0.0015"/>
+                    </geometry>
+                    <material name="black">
+                         <color rgba="0.0 0.0 0.0 1.0"/>
+                         <texture filename=""/>
+                    </material>
+               </visual>
+               <collision>
+                    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+                    <geometry>
+                         <mesh filename="package://robot_simulation_description/meshes/LiDAR.dae" scale="0.0015 0.0015 0.0015"/>
+                    </geometry>
+               </collision>
+          </link>
+
+          <joint name="LiDAR_joint" type="fixed">
+               <origin xyz="0.26 -0.06 -0.00" rpy="1.5705 0 3.14"/>
+               <parent link="top_layer_link"/>
+               <child link="LiDAR_link"/>
+               <axis xyz="0.0 0.0 0.0"/>
+     
+          </joint>
 </robot>
