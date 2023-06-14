@@ -235,10 +235,21 @@ otherwise, you can install it by using:
                <origin xyz="0.30 0.0 0.06" rpy="0.0 0.0 1.5705"/>
                <parent link="base_link"/>
                <child link="camera_link"/>
-               <axis xyz="0.0 0.0 0.0"/>
-     
+               <axis xyz="0.0 0.0 0.0"/>     
           </joint>
 
+          <!-- For Optical data correction if needed .. -->
+          <link name="camera_optical_data_correction_link">
+               
+          </link>
+
+          <joint name="camera_optical_data_correction_joint" type="fixed">
+               <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 -1.5705"/>
+               <parent link="camera_link"/>
+               <child link="camera_optical_data_correction_link"/>
+               <axis xyz="0.0 0.0 0.0"/>
+               
+          </joint>
 
 
           <!---LiDAR Camera-->  
@@ -274,4 +285,20 @@ otherwise, you can install it by using:
                <axis xyz="0.0 0.0 0.0"/>
      
           </joint>
+
+
+
+          <!-- For LiDAR data correction if needed .. -->
+          <link name="LiDAR_optical_data_correction_link">
+               
+          </link>
+
+          <joint name="LiDAR_optical_data_correction_joint" type="fixed">
+               <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+               <parent link="LiDAR_link"/>
+               <child link="LiDAR_optical_data_correction_link"/>
+               <axis xyz="0.0 0.0 0.0"/>
+               
+          </joint>
+
 </robot>

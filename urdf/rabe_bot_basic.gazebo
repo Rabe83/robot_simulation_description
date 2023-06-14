@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <diffrobot>
 
-
+<!-- Plug in for differential_drive_controller -->
   <gazebo>
       <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
 
@@ -62,8 +62,8 @@
     </gazebo>
 
 <!-- RGBD Camera -->
-  <!-- <gazebo reference="camera_link_optical">
-    <sensor type="depth" name="camera">
+    <gazebo reference="camera_optical_data_correction_link">
+      <sensor type="depth" name="camera_optical_data_correction_link_camera">
         <always_on>1</always_on>
         <update_rate>20.0</update_rate>
         <visualize>true</visualize>             
@@ -82,11 +82,11 @@
                 <far>20</far>
             </clip>
         </camera>
-         <plugin name="camera_controller" filename="libgazebo_ros_openni_kinect.so">
+         <plugin name="camera_optical_data_correction_link_controller" filename="libgazebo_ros_openni_kinect.so">
             <alwaysOn>true</alwaysOn>
             <updateRate>10.0</updateRate>
             <cameraName>kinect</cameraName>
-            <frameName>camera_link_optical</frameName>                   
+            <frameName>camera_optical_data_correction_link</frameName>                   
             <imageTopicName>rgb/image_raw</imageTopicName>
             <depthImageTopicName>depth/image_raw</depthImageTopicName>
             <pointCloudTopicName>depth/points</pointCloudTopicName>
@@ -104,8 +104,8 @@
             <Cy>0.0</Cy>
             <focalLength>0.0</focalLength>
             </plugin>
-    </sensor>
-  </gazebo> -->
+      </sensor>
+    </gazebo>
 
   	<gazebo reference="base_link">
 	  	<material>Gazebo/White</material>
