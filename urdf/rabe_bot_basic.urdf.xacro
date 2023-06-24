@@ -60,7 +60,7 @@ otherwise, you can install it by using:
                               <visual name="">
                                         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
                                         <geometry>
-                                                  <cylinder radius="0.015" length="0.2"/>
+                                                  <cylinder radius="${radius}" length="${length}"/>
                                         </geometry>
                                         <material name="">
                                                   <color rgba="0.0 0.0 0.0 1.0"/>
@@ -70,7 +70,7 @@ otherwise, you can install it by using:
                               <collision>
                                         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
                                         <geometry>
-                                                  <cylinder radius="0.015" length="0.2"/>
+                                                  <cylinder radius="${radius}" length="${length}"/>
                                         </geometry>
                               </collision>
                     </link>
@@ -88,7 +88,9 @@ otherwise, you can install it by using:
           <xacro:stand name="rear_right_stand" x="0.25" y="-0.15" z="0.1" mass="0.05" radius="0.015" length="0.2"/>
           <xacro:stand name="rear_left_stand" x="0.25" y="0.15" z="0.1" mass="0.05" radius="0.015" length="0.2"/>
           
-        
+          <xacro:stand name="under_lidar_stand" x="0.2" y="-0.0" z="0.30" mass="0.05" radius="0.03" length="0.15"/>
+
+
           <!-- Layer Two Top -->
 
           <link name="top_layer_link">
@@ -205,7 +207,7 @@ otherwise, you can install it by using:
           
 
 
-          <!---Kinect/Depth Camera-->  
+          <!---Kinect/Depth Camera  POINTCLOUD-->  
 
           <link name="camera_link">
                <inertial>
@@ -252,15 +254,19 @@ otherwise, you can install it by using:
           </joint>
 
 
-          <!---LiDAR Camera-->  
 
-          <link name="LiDAR_link">
+
+ 
+
+         <!---LiDAR Camera-->  
+
+          <link name="lidar_link">
                <inertial>
                     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
                     <mass value="0.1"/>
                     <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
                </inertial>
-               <visual name="">
+               <visual name="lidar_visual">
                     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
                     <geometry>
                          <mesh filename="package://robot_simulation_description/meshes/LiDAR.dae" scale="0.0015 0.0015 0.0015"/>
@@ -278,10 +284,11 @@ otherwise, you can install it by using:
                </collision>
           </link>
 
-          <joint name="LiDAR_joint" type="fixed">
-               <origin xyz="0.26 -0.06 -0.00" rpy="1.5705 0 3.14"/>
+          <joint name="lidar_joint" type="fixed">
+               <!-- <origin xyz="0.26 -0.06 0.00" rpy="1.5705 0 3.14"/> -->
+               <origin xyz="0.26 -0.05 0.15" rpy="1.5705 0 3.14"/>
                <parent link="top_layer_link"/>
-               <child link="LiDAR_link"/>
+               <child link="lidar_link"/>
                <axis xyz="0.0 0.0 0.0"/>
      
           </joint>
@@ -289,14 +296,14 @@ otherwise, you can install it by using:
 
 
           <!-- For LiDAR data correction if needed .. -->
-          <link name="LiDAR_optical_data_correction_link">
+          <link name="lidar_optical_data_correction_link">
                
           </link>
 
-          <joint name="LiDAR_optical_data_correction_joint" type="fixed">
-               <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-               <parent link="LiDAR_link"/>
-               <child link="LiDAR_optical_data_correction_link"/>
+          <joint name="lidar_optical_data_correction_joint" type="fixed">
+               <origin xyz="0.0 0.0 0.0" rpy="1.5705 0.0 0.0"/>
+               <parent link="lidar_link"/>
+               <child link="lidar_optical_data_correction_link"/>
                <axis xyz="0.0 0.0 0.0"/>
                
           </joint>
